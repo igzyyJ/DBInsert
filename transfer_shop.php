@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Unos u tablicu Wordpress (WPPost) </title>
+        <title>Unos u tablicu Shop-a </title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -55,7 +55,11 @@
                 <a class="nav-link" href="index.php">Home / Naslovna<span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Adapter (db > Wp/post)</a>
+                <a class="nav-link" href="adapter.php">Adapter (db > Wp/post)</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="#">Adapter (shop)</a>
               </li>
 
 
