@@ -28,12 +28,12 @@
         $password = "";
        // $dbname = "ss";
         $dbname = "transfer";
-        $conn = mysqli_connect($servername, $username, $password, $dbname);
+       $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 
 
       if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $ig = $_POST["Id"];
+       $ig = $_POST["Id"];
        insert();
               echo' <script type="text/javascript">
                       $(document).ready(function(){
@@ -59,6 +59,10 @@
               </li>
 
               <li class="nav-item">
+                <a class="nav-link" href="shop_index.php">Pregled Shop artikala</a>
+              </li>
+
+              <li class="nav-item">
                 <a class="nav-link" href="#">Adapter (shop)</a>
               </li>
 
@@ -74,7 +78,7 @@
 
           <!-- Jumbotron -->
               <div class="jumbotron">
-                <h1>transport sadržaja u Wordpress </h1>
+                <h1>transport sadržaja u Shop </h1>
                                       <?php
                                       if (!$conn) {
                                       die("Connection failed: " . mysqli_connect_error());
@@ -110,7 +114,7 @@ try{
   $dbname = "transfer";
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   $ig = 0;
-                $postTitle = "select * from novosti";
+                $postTitle = "select * from ponuda";
                 $resulTitle = $conn ->query($postTitle);
 
                                 if($resulTitle ->num_rows > 0){
@@ -118,10 +122,12 @@ try{
                                     $titl = wp_strip_all_tags($row["naziv"]);
                                     $sadrzaj = wp_strip_all_tags($row["detaljnije"]);
                                     // $sadrzajString =  "'convert(cast(convert('".$row["detaljnije"]."' using latin1) as binary) using utf8)'";
-                                    $sql = "INSERT INTO wp_posts (post_author, post_content,  post_title, post_excerpt, post_status, comment_status, post_name, guid, post_type) VALUES (1, '$sadrzaj',  '$titl', '', 'publish', 'closed' ,'$titl', 'http://localhost:800/transfer/?p=".$ig."', 'post')";
+                                    $sql = "INSERT INTO wp_posts (post_author, post_content,  post_title, post_excerpt, post_status, comment_status, post_name, guid, post_type) VALUES (1, '$sadrzaj',  '$titl', '', 'publish', 'closed' ,'$titl', 'http://localhost:800/transfer/?post_type=product&p=".$ig."', 'product')";
                                     $conn ->query($sql);
                                     $ig = $ig+1;
                                   //  echo '<h4>insertano , od = '.$ig.'</h4>';
+                                  //http://www.robmackie.co.uk/coding/get-all-products-from-woocommerce-database
+                                  //https://www.ascii.cl/htmlcodes.htm
                                     }
                                 }
 
@@ -173,9 +179,9 @@ try{
 
 <div class="row">
     <div class="col-sm">
-  <form action="transfer.php" method="post" id="transfer">
+  <form action="transfer_shop.php" method="post" id="transfer">
     <div class="form-group">
-        <label for="exampleInputEmail1">Unesi id od koje kreće unos u post (obično je 5)</label>
+        <label for="exampleInputEmail1">Unesi id od koje kreće unos u post</label>
     <input type="text" name="Id" value="">
   </div>
       <button type="submit" class="btn btn-primary">Unesi u tablicu</button>

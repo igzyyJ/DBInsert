@@ -39,7 +39,7 @@
                               </li>
 
                               <li class="nav-item">
-                                <a class="nav-link" href="shop_index.php">Pregled Shop artikala</a>
+                                <a class="nav-link" href="#">Pregled Shop artikala</a>
                               </li>
 
                               <li class="nav-item">
@@ -57,7 +57,7 @@
 
     <!-- Jumbotron -->
         <div class="jumbotron">
-          <h1>Pregled sadržaja koji ide u novu bazu</h1>
+          <h1>Pregled artikala koji ide u novu bazu</h1>
                                 <?php
                                 if (!$conn) {
                                 die("Connection failed: " . mysqli_connect_error());
@@ -70,34 +70,32 @@
                                         mysqli_set_charset($conn, 'utf8');
                                 }?>
 
-<!--
-ALTER TABLE
-   table_name
-   CONVERT TO CHARACTER SET utf8mb4
-   COLLATE utf8mb4_unicode_ci; -->
-                                <div class="progress">
-                                  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                </div>
+
+
 
         </div>
 
-
+<div class="row">
+  <div class="col-lg-10">
 
 <?php
 try {
 
 
-echo '<table class="table">
+echo '  <table class="table">
 <thead class="thead-dark">
 <tr>
 <th>ID</th>
 <th>naziv</th>
-<th>sadržaj</th>
+<th>text</th>
 <th>kategorija</th>
-<th>tekst</th>
+<th>sub-kategorija</th>
+<th>detaljnije</th>
+<th>slika</th>
+<th>kljućne riječi</th>
 </tr></thead><tbody>';
 $count = 0;
-$postTitle = "select * from novosti order by ID ASC";
+$postTitle = "select * from ponuda order by ID ASC";
 $resulTitle = $conn ->query($postTitle);
 
 if($resulTitle ->num_rows > 0){
@@ -108,9 +106,12 @@ echo'
 <tr>
 <td scope="row">'.$row["id"].'</td>
 <td> '.$row["naziv"].' </td>
-<td> '.$row["detaljnije"].' </td>
-<td> '.$row["kateg"].' </td>
 <td> '.$row["tekst"].' </td>
+<td> '.$row["kateg"].' </td>
+<td> '.$row["sub"].' </td>
+<td> '.$row["detaljnije"].' </td>
+<td> '.$row["slika"].' </td>
+<td> '.$row["kljucne_rijeci"].' </td>
 </tr>';
 
   }
@@ -128,7 +129,8 @@ echo'
 	mysqli_free_result($resulTitle);
 
         ?>
-
+</div>
+</div>
 
       </div>
     </body>

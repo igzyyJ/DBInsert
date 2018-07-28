@@ -58,6 +58,14 @@
                 <a class="nav-link" href="#">Adapter (db > Wp/post)</a>
               </li>
 
+              <li class="nav-item">
+                <a class="nav-link" href="shop_index.php">Pregled Shop artikala</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="transfer_shop.php">Adapter Shop</a>
+              </li>
+
 
             </ul>
           </div>
