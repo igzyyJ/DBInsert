@@ -138,6 +138,18 @@ $sql  ."(1, 'detalji', '', 'ffnaslov', '', 'publish', 'ping', '', 'post')";
 
 https://dba.stackexchange.com/questions/123572/convert-mysql-database-from-latin1-to-utf8mb4-and-take-care-of-german-umlauts
 
+
+
+konvertiranje baze :
+https://stackoverflow.com/questions/9407834/mysql-convert-latin1-characters-on-a-utf8-table-into-utf8
+
+
+# For each table
+REPAIR TABLE table_name;
+OPTIMIZE TABLE table_name;
+
+
+
         ?>
     </body>
 </html>
