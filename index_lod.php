@@ -149,6 +149,10 @@ REPAIR TABLE table_name;
 OPTIMIZE TABLE table_name;
 
 
+//slike
+//https://stackoverflow.com/questions/28643654/where-is-the-post-featured-image-link-stored-in-the-wordpress-database
+
+//https://stackoverflow.com/questions/15585063/how-to-set-wordpress-featured-images-via-sql
 
         ?>
     </body>

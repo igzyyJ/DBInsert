@@ -123,7 +123,32 @@ try{
                                     $sadrzaj = wp_strip_all_tags($row["detaljnije"]);
                                     // $sadrzajString =  "'convert(cast(convert('".$row["detaljnije"]."' using latin1) as binary) using utf8)'";
                                     $sql = "INSERT INTO wp_posts (post_author, post_content,  post_title, post_excerpt, post_status, comment_status, post_name, guid, post_type) VALUES (1, '$sadrzaj',  '$titl', '', 'publish', 'closed' ,'$titl', 'http://localhost:800/transfer/?p=".$ig."', 'post')";
-                                    $conn ->query($sql);
+
+
+
+
+                                    //unašam slike1
+                                    $filename = "https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?auto=compress&cs=tinysrgb&h=350";
+                                    $parentpostid = $ig; //predhodni post slike
+                                    $sqlPictures = "INSERT INTO wp_posts (post_author, post_type, guid, status, post_mime_type, post_parent) VALUES (1, 'attachment', '.$filename.', 'publish', 'image/jpeg', .$parentpostid.)";
+
+
+
+                                    //post meta2
+                                    $filename = "pexels-photo";
+                                    $parentpostid = $ig+1;
+                                    $sqlPostMeta =  "INSERT INTO wp_postmeta (meta_value, meta_key, post_id) VALUES ( '.$filename.', '_wp_attached_file', '.$parentpostid.')";
+
+                                    $sqlPostMeta2 =  "INSERT INTO wp_postmeta (meta_value, meta_key, post_id) VALUES ( '.$ig.', '_thumbnail_id', '.$ig.')";
+
+
+
+
+                                  //  $conn ->query($sql);
+                                    $conn ->query($sqlPictures); //slike
+                                  //  $conn -> query($sqlPostMeta); //postmeta
+                                    //$conn -> query($sqlPostMeta2); //postmeta
+
                                     $ig = $ig+1;
                                   //  echo '<h4>insertano , od = '.$ig.'</h4>';
                                     }
@@ -145,7 +170,7 @@ try{
                                   </div>';
                       }
 
- catch (Exception $e) {
+ catch (SQLException $e) {
  echo 'Poruka '. $e -> getMessage();
  }
 
