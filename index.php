@@ -46,6 +46,10 @@
                                 <a class="nav-link" href="transfer_shop.php">Adapter Shop</a>
                               </li>
 
+                              <li class="nav-item">
+                                <a class="nav-link" href="DBFixChart.php">DB FIX</a>
+                              </li>
+
 
                             </ul>
                           </div>

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Unos u tablicu Wordpress (WPPost) </title>
+        <title>DB FIX </title>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
@@ -78,7 +78,7 @@
 
           <!-- Jumbotron -->
               <div class="jumbotron">
-                <h1>transport sadržaja u Wordpress </h1>
+                <h1>DB FIX</h1>
                                       <?php
                                       if (!$conn) {
                                       die("Connection failed: " . mysqli_connect_error());
@@ -113,44 +113,24 @@ try{
   $password = "";
   $dbname = "transfer";
   $conn = mysqli_connect($servername, $username, $password, $dbname);
-  $ig = 0;
+  //izmjena svega
                 $postTitle = "select * from novosti";
                 $resulTitle = $conn ->query($postTitle);
 
+                function provjera($str){
+                  return $htmlspecialchars($str, ENT_QUOTES);
+                }
+
                                 if($resulTitle ->num_rows > 0){
                                   while($row = $resulTitle -> fetch_assoc()){
-                                    $titl = wp_strip_all_tags($row["naziv"]);
-                                    $sadrzaj = wp_strip_all_tags($row["detaljnije"]);
-                                    // $sadrzajString =  "'convert(cast(convert('".$row["detaljnije"]."' using latin1) as binary) using utf8)'";
-                                    $sql = "INSERT INTO wp_posts (post_author, post_content,  post_title, post_excerpt, post_status, comment_status, post_name, guid, post_type) VALUES (1, '$sadrzaj',  '$titl', '', 'publish', 'closed' ,'$titl', 'http://localhost:800/transfer/?p=".$ig."', 'post')";
 
 
+                                    $zamjeni = $row["naziv"];
+                                    $zamjeni = str_replace("?", "š");
 
+                                  $sqlT= "update novosti set naziv = '".$zamjeni."' where id = 27";
+                                  $conn ->query($sqlT);
 
-                                    //unašam slike1
-                                    $filename = "https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?auto=compress&cs=tinysrgb&h=350";
-                                    $parentpostid = $ig; //predhodni post slike
-                                  //  $sqlPictures = "INSERT INTO wp_posts (post_author, post_type, guid, status, post_mime_type, post_parent) VALUES (1, 'attachment', '$filename', 'publish', 'image/jpeg', .$parentpostid.)";
-                                    $sqlPictures = "INSERT INTO wp_posts (post_author, post_content, post_status, comment_status, post_name, guid, post_type, post_mime_type) VALUES  (1, 'sadrzaj' , 'publish', 'closed' ,'naslov-slika', 'slika', 'attachment','image/jpeg')";
-
-
-                                    //post meta2
-                                    $filename = "pexels-photo";
-                                    $parentpostid = $ig+1;
-                                    $sqlPostMeta =  "INSERT INTO wp_postmeta (meta_value, meta_key, post_id) VALUES ( '.$filename.', '_wp_attached_file', '.$parentpostid.')";
-
-                                    $sqlPostMeta2 =  "INSERT INTO wp_postmeta (meta_value, meta_key, post_id) VALUES ( '.$ig.', '_thumbnail_id', '.$ig.')";
-
-
-
-
-                                  //  $conn ->query($sql);
-                                    $conn ->query($sqlPictures); //slike
-                                  //  $conn -> query($sqlPostMeta); //postmeta
-                                    //$conn -> query($sqlPostMeta2); //postmeta
-
-                                    $ig = $ig+1;
-                                  //  echo '<h4>insertano , od = '.$ig.'</h4>';
                                     }
                                 }
 
@@ -162,7 +142,7 @@ try{
                                                   <h4 class="modal-title">Uspješan unos</h4>
                                               </div>
                                               <div class="modal-body">
-                                                        <p>unio si : '.$ig.'</p>
+
 
                                               </div>
                                           </div>
@@ -193,49 +173,6 @@ try{
                                </div>
                             </div>
                         </div>
-
-
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "transfer";
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-$sqlCont = "SELECT COUNT(*) FROM wp_posts";
-$sqlMaxID = "SELECT MAX(ID) FROM wp_posts";
-//$rezultatCount = $conn-> query($sqlCont);
-//$rezultatCount = mysqli_query($conn, $sqlCont);
-
-$rezultatCount = mysqli_query($conn, $sqlCont);
-$row = mysqli_fetch_array($rezultatCount);
-
-$rezultatCountmAXID = mysqli_query($conn, $sqlMaxID);
-$row2 = mysqli_fetch_array($rezultatCountmAXID);
-
-
-//unašam slike1
-//$filename = "https://images.pexels.com/photos/207142/pexels-photo-207142.jpeg?auto=compress&cs=tinysrgb&h=350";
-//$filename2 = "pexels-photo";
-//$parentpostid = $row2[0]; //predhodni post slike
-
-//$sql = "INSERT INTO wp_posts (post_author, post_status, comment_status, post_name, guid, post_type, post_mime_type, post_parent) VALUES  (1, 'inherit', 'closed' ,'$filename2', '.$filename.', 'attachment','image/jpeg', 20)";
-//$sqlPostMeta =  "INSERT INTO wp_postmeta (meta_value, meta_key, post_id) VALUES ( 12, '_thumbnail_id', 20)";
-
-
-//$conn ->query($sql);
-//$conn ->query($sqlPostMeta);
-
-
-
-echo'
-<div class="row">
-    <div class="col-sm">
-    <p>Zadnji ID je : "'.$row[0].'"</p>
-</div></div>
-';
-//mysqli_free_result($rezultatCount);
-//mysqli_free_result($rezultatCountmAXID);
-?>
 
 
 
