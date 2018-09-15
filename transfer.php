@@ -27,7 +27,7 @@
         $username = "root";
         $password = "";
        // $dbname = "ss";
-        $dbname = "transfer";
+        $dbname = "wp_tnekretnine";
         $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 
@@ -111,10 +111,10 @@ try{
   $servername = "localhost";
   $username = "root";
   $password = "";
-  $dbname = "transfer";
+  $dbname = "wp_tnekretnine";
   $conn = mysqli_connect($servername, $username, $password, $dbname);
   $ig = 0;
-                $postTitle = "select * from novosti";
+                $postTitle = "SELECT * FROM vivoostalo";
                 $resulTitle = $conn ->query($postTitle);
 
                                 if($resulTitle ->num_rows > 0){
@@ -122,7 +122,7 @@ try{
                                     $titl = wp_strip_all_tags($row["naziv"]);
                                     $sadrzaj = wp_strip_all_tags($row["detaljnije"]);
                                     // $sadrzajString =  "'convert(cast(convert('".$row["detaljnije"]."' using latin1) as binary) using utf8)'";
-                                    $sql = "INSERT INTO wp_posts (post_author, post_content,  post_title, post_excerpt, post_status, comment_status, post_name, guid, post_type) VALUES (1, '$sadrzaj',  '$titl', '', 'publish', 'closed' ,'$titl', 'http://localhost:800/transfer/?p=".$ig."', 'post')";
+                                    $sql = "INSERT INTO wp_posts (post_author, post_content,  post_title, post_excerpt, post_status, comment_status, post_name, guid, post_type) VALUES (1, '$sadrzaj',  '$titl', '', 'publish', 'closed' ,'$titl', 'http://localhost:800/transfer/?p=".$ig."', 'property')";
 
 
 
